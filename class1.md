@@ -4,13 +4,22 @@ revealOptions:
 ---
 
 
-<img src="images/circle-gdi-logo.png" alt="GDI logo">
+<img src="static/images/circle-gdi-logo.png" alt="GDI logo">
 
 ## Intermediate Python
 ### Class 1
 
 ---
 
+## What you'll need
+
+* A text editor
+* Terminal
+* Python 3
+  * [Installation guide](http://docs.python-guide.org/en/latest/starting/installation/)
+  * If you don't have this installed, you can use [repl.it](https://repl.it/languages/python3) for today
+
+---
 
 ## Welcome
 
@@ -33,7 +42,7 @@ Some "rules":
 
 * Who are you?
 * What do you hope to get out of the class?
-* TODO
+* What music did you listen to today?
 
 ---
 
@@ -41,6 +50,7 @@ Some "rules":
 
 * Object-oriented programming (OOP)
 * Handling errors
+* Modules and packages
 * Using 3rd party packages
 * Web concepts
 * Building a web app with Python
@@ -73,14 +83,14 @@ When programs get large, we need a way to organize our code...
 
 ### A **modeling technique**
 
-Group together data and behavior into logical units
+Group properties and behavior into logical units
 
 * *classes*: The blueprints that create...
 * *instances*: The real objects.
 
 ---
 
-<img height="500" src="images/oop-car.png" alt="OOP Car" />
+<img height="500" src="static/images/oop-car.png" alt="OOP Car" />
 
 <small>Photo credit: Wikimedia Commons</small>
 
@@ -95,7 +105,7 @@ Classes implement...
 
 ### Let's develop it (conceptually)
 
-<img src="images/markers.jpg" alt="Markers" />
+<img src="static/images/markers.jpg" alt="Markers" />
 
 
 <small>Photo credit: David Guo</small>
@@ -151,7 +161,7 @@ class DryEraseMarker:
     def __init__(self, color):
         self.color = color
 
-blue_marker = Marker(color='blue')
+blue_marker = DryEraseMarker(color='blue')
 print(blue_marker.color)
 ```
 
@@ -172,7 +182,7 @@ class DryEraseMarker:
 blue_marker = DryEraseMarker(color='blue')
 print(blue_marker.color)  # => 'blue'
 
-my_multi_color_marker = Marker(color='red')
+my_multi_color_marker = DryEraseMarker(color='red')
 my_multi_color_marker.color = 'green'
 print(my_multi_color_marker.color)  # => 'green'
 ```
@@ -218,7 +228,7 @@ print(blue_marker.color)
 print(blue_marker.write('hi'))  # => 'blue: hi'
 ```
 
-* Instantiate another `Marker` and call `write` with some text
+* Instantiate another `DryEraseMarker` and call `write` with some text
 
 ---
 
@@ -249,7 +259,7 @@ Process by which a "child" class derives data and behavior of a parent class
 
 ---
 
-<img src="images/vehicle-inheritance.png" alt="Vehicle inheritance" />
+<img src="static/images/vehicle-inheritance.png" alt="Vehicle inheritance" />
 
 <small>Photo credit: baseread.com</small>
 
@@ -263,7 +273,7 @@ those.
 
 How can we represent other types of writing implements?
 
-<img src="images/markers.jpg" alt="Markers" />
+<img src="static/images/markers.jpg" alt="Markers" />
 
 NOTE: Diagram class's suggestions on whiteboard
 
@@ -463,7 +473,7 @@ Add a class variable to one or more of the classes you've written.
 class DryEraseMarker(WritingImplement):
     brand = 'Expo'
     eraseable = True
-    capped = True
+    has_cap = True
 ```
 
 ---
@@ -526,13 +536,13 @@ raise Exception('some useful error message')
 class WritingImplement:
     def __init__(self, color):
         if not isinstance(color, str):
-            raise ValueError('color must be a string')
+            raise TypeError('color must be a string')
         self.color = color
 
 
 # this will crash! (and that's a good thing)
 bad_pen = WritingImplement(color=42)
-# ValueError: color must be a string
+# TypeError: color must be a string
 ```
 
 ---
@@ -551,11 +561,11 @@ class WritingImplement:
 
 * Write code to create a `WritingImplement` called `pen`
 * Pass a `bool` as the color
-* Handle the ValueError and print `"No pen, no problem"`
+* Handle the TypeError and print `"No pen, no problem"`
 
 Extra credit:
 
-* Instead of printing when a ValueError occurs, instantiate the pen
+* Instead of printing when a TypeError occurs, instantiate the pen
     again, passing `"black"` as the color. then write `"back in black"`
     with the `pen`
 
@@ -565,7 +575,7 @@ Extra credit:
 ```python
 try:
     pen = WritingImplement(color=True)
-except ValueError:
+except TypeError:
     print('No pen, no problem')
 ```
 ----
@@ -574,7 +584,7 @@ except ValueError:
 ```python
 try:
     pen = WritingImplement(color=True)
-except ValueError:
+except TypeError:
     pen = WritingImplement(color='black')
 
 print(pen.write('back in black'))
@@ -582,13 +592,86 @@ print(pen.write('back in black'))
 
 ---
 
+### Main points
+
+* OOP helps us **organize programs**
+* Groups **data (attributes)** and **behavior (methods)** into classes
+* Classes are blueprints that create **instances**
+* **Inheritance** allows child classes to derive data and behavior of a
+    parent class
+* `try/except` for handling errors, `raise` for raising errors
+
+---
+
+### Further reading
+
+* https://jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/
+* http://greenteapress.com/thinkpython/html/thinkpython016.html
+
+---
+
 ## Questions?
 
 ---
 
-<img src="images/circle-gdi-logo.png" alt="GDI logo">
-
-## Intermediate Python
-### Class 2
+### Further exploration
+## Classes as types
 
 ---
+
+### Classes as types
+
+`str`, `bool`, `int`, et al. are all classes
+
+---
+
+```python
+number = int(42)
+# Equivalent: number = 42
+
+# Instance variables
+number.real
+number.imag
+
+# Methods
+number.bit_length()
+```
+
+---
+
+### Defining your own types
+
+```python
+class Fahrenheit(float):
+
+    def __init__(self, num):
+        super()
+        self.num = num
+
+    def to_celsius(self):
+        return (self.num - 32) * 9 / 5
+
+
+f = Fahrenheit(451)
+print(f.to_celsius())  # => 754.2
+```
+
+---
+
+### Let's develop it
+
+Create a file called mytypes.py and add
+the following:
+
+```python
+class Fahrenheit(float):
+
+    def __init__(self, num):
+        super()
+        self.num = num
+
+    def to_celsius(self):
+        return (self.num - 32) * 9 / 5
+```
+
+Add a to_kelvin() method that converts the fahrenheit value to Kelvin.

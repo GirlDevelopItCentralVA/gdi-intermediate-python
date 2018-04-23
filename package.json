@@ -4,15 +4,20 @@
   "private": true,
   "description": "",
   "scripts": {
-    "start": "reveal-md presentation.md -w",
+    "start": "reveal-md -w",
+    "class1": "npm start -- class1.md",
+    "class2": "npm start -- class2.md",
+    "class3": "npm start -- class3.md",
+    "class4": "npm start -- class4.md",
     "deploy": "npm run build && surge -p dist/ -d gdi-intermediate-python.surge.sh",
-    "build": "rimraf dist/ && reveal-md presentation.md --static dist && mkdir -p dist/images/ && cp -r images/ dist/images && cp -r css/ dist/css && cp -r js/ dist/js"
+    "build": "./build.sh",
+    "serve": "npm run build && serve dist/"
   },
   "author": "Steven Loria",
   "license": "MIT",
   "dependencies": {
     "reveal-md": "^1.1.3",
-    "rimraf": "^2.6.2",
+    "serve": "^6.5.6",
     "surge": "^0.19.0"
   }
 }
