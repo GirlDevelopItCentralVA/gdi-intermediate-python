@@ -318,11 +318,11 @@ class WritingImplement:
 
 class DryEraseMarker(WritingImplement):
     def erase(self):
-        return '<erased>'
+        return ''
 
 blue_marker = DryEraseMarker(color='blue')
-blue_marker.write('hi')  # => 'blue: hi'
-blue_marker.erase()  # => '<erased>'
+print(blue_marker.write('hi'))  # => 'blue: hi'
+print(blue_marker.erase())  # => ''
 ```
 
 ---
@@ -421,7 +421,7 @@ class BoldMarker(WritingImplement):
     def write(self, text):
         # We call super() to get the parent
         # class's method
-        ret = super().write(text)
+        ret = super().write(text)  # => 'black: hi'
         # Then we modify the return value of
         # the parent class
         return ret.upper()
@@ -470,10 +470,33 @@ Add a class variable to one or more of the classes you've written.
 ---
 
 ```python
+POINTED = 0
+CHISEL = 1
+
 class DryEraseMarker(WritingImplement):
-    brand = 'Expo'
-    eraseable = True
-    has_cap = True
+    label = 'low odor; dry erase'
+    tip = CHISEL
+```
+
+---
+
+```python
+POINTED = 0
+CHISELED = 1
+class DryEraseMarker(WritingImplement):
+    label = 'low odor; dry erase'
+    tip = CHISELED
+
+if blue_marker.tip == 0:
+    print('pointy')
+else:
+    print('chisely')
+
+# More readable
+if blue_marker.tip == POINTED:
+    print('pointy')
+else:
+    print('chisely')
 ```
 
 ---
@@ -555,7 +578,7 @@ Copy the following into your program:
 class WritingImplement:
     def __init__(self, color):
         if not isinstance(color, str):
-            raise ValueError('color must be a string')
+            raise TypeError('color must be a string')
         self.color = color
 ```
 
@@ -592,7 +615,7 @@ print(pen.write('back in black'))
 
 ---
 
-### Main points
+### Summary
 
 * OOP helps us **organize programs**
 * Groups **data (attributes)** and **behavior (methods)** into classes
@@ -611,67 +634,3 @@ print(pen.write('back in black'))
 ---
 
 ## Questions?
-
----
-
-### Further exploration
-## Classes as types
-
----
-
-### Classes as types
-
-`str`, `bool`, `int`, et al. are all classes
-
----
-
-```python
-number = int(42)
-# Equivalent: number = 42
-
-# Instance variables
-number.real
-number.imag
-
-# Methods
-number.bit_length()
-```
-
----
-
-### Defining your own types
-
-```python
-class Fahrenheit(float):
-
-    def __init__(self, num):
-        super()
-        self.num = num
-
-    def to_celsius(self):
-        return (self.num - 32) * 9 / 5
-
-
-f = Fahrenheit(451)
-print(f.to_celsius())  # => 754.2
-```
-
----
-
-### Let's develop it
-
-Create a file called mytypes.py and add
-the following:
-
-```python
-class Fahrenheit(float):
-
-    def __init__(self, num):
-        super()
-        self.num = num
-
-    def to_celsius(self):
-        return (self.num - 32) * 9 / 5
-```
-
-Add a to_kelvin() method that converts the fahrenheit value to Kelvin.
