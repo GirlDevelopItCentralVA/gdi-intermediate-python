@@ -12,6 +12,6 @@ revealOptions:
 ### Materials
 
 * [Class 1](class1.html)
-<!-- * [Class 2](class2.html) -->
-<!-- * [Class 3](class3.html) -->
-<!-- * [Class 4](class4.html) -->
+* [Class 2](class2.html)
+* [Class 3](class3.html)
+* [Class 4](class4.html)

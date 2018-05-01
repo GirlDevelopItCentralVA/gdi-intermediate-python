@@ -1,7 +1,7 @@
 rm -rf dist/
 
 # Build individual classes
-classes=(class1.md class2.md)
+classes=(class1.md class2.md class3.md class4.md)
 for filename in "${classes[@]}"; do
   ./node_modules/.bin/reveal-md "$filename" --static dist/
   basename=$(basename "$filename" .md)
