@@ -501,6 +501,12 @@ in order to run your tests.
 ### Let's develop it
 
 * In `templates/character.html`, uncomment the link to `/bear/`.
+
+```jinja
+{# TODO: Uncomment these after you've implemented Bear and Bird #}
+<a class="link grow black-80 hover-blue    f6 f5-ns dib mr3" href="/bear/" title="About">Bear</a>
+```
+
 * Edit `main/views.py` to use the `Bear` class when `bear/` is passed
     in the URL.
 
@@ -550,6 +556,11 @@ class Classic(Character):
 ---
 
 ## You made it!
+
+---
+
+Before you close your terminal, don't forget to shut down your
+development server using `ctrl-c`.
 
 ---
 

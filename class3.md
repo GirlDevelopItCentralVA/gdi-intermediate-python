@@ -531,12 +531,18 @@ def hello_form(request):
 
 <img height="500" src="static/images/hello-redirect.png" alt="Redirect">
 
+---
+
+Before you close your Terminal, don't 
 
 ---
 
-
 ## Questions?
 
+---
+
+Before you close your terminal, don't forget to shut down your
+development server using `ctrl-c`.
 
 ---
 

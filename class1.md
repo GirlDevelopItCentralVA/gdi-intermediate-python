@@ -52,9 +52,10 @@ Some "rules":
 * Handling errors
 * Modules and packages
 * Using 3rd party packages
-* Web concepts
+* How the web works
+* Automated testing
 * Building a web app with Python
-* A little bit of NLP?
+* A dash of NLP
 
 ---
 
